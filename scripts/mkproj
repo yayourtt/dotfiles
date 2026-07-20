@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+#==========================================================
+# mkproj
+#
+# Creates a new project folder, initializes Git,
+# creates basic files and open VS Code.
+#
+# Usage :
+#	mkproj my-project
+#==========================================================
+
+# Check if a project name was provided
+if [ $# -eq 0]; then
+	echo "Usage: mkproj <name>"
+	exit 1
+fi
+
+# Create a folder using the first argument
+mkdir "$1"
+
+# Enter the new folder, prevents the script from continuing
+# if the folder could not be entered
+cd "$1" || exit
+
+# initialize a new git repository
+git init
+
+# Create a README file with the project name inside
+echo "# $1" > README.md
+
+# Create an empty gitignore file
+touch .gitignore
+
+# Open the current folder in VS Code.
+code .
+
+# Inform the user that everything completed succesfully
+echo "Project '$1' created succesfully"
