@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+#==========================================================
+# sysupdate
+#
+# Updates the system (official repos + AUR), cleans the
+# package cache and trims old systemd journal logs.
+#
+# Usage :
+# ├─┤sysupdate
+#==========================================================
+
+# Stop immediately if any command fails
+set -e
+
+# Update packages: use an AUR helper if one is installed,
+# since it also upgrades AUR packages on top of official repos
+if command -v yay >/dev/null 2>&1; then
+    yay -Syu
+elif command -v paru >/dev/null 2>&1; then
+    paru -Syu
+else
+    # No AUR helper found, fall back to plain pacman
+    sudo pacman -Syu
+fi
+
+# Update Flatpak apps, but only if Flatpak is actually installed
+if command -v flatpak >/dev/null 2>&1; then
+    flatpak update -y
+fi
+
+# Remove old cached package versions, keep the 2 most recent per package
+# (needs pacman-contrib for paccache)
+if command -v paccache >/dev/null 2>&1; then
+    sudo paccache -rk2
+fi
+
+# Trim systemd journal logs, keep only the last 2 weeks
+sudo journalctl --vacuum-time=2weeks
+
+# Inform the user that everything completed succesfully
+echo "System up to date."
