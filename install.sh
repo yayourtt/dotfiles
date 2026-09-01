@@ -20,6 +20,12 @@ link "$DOTFILES_DIR/.zshrc" "$HOME/.zshrc"
 link "$DOTFILES_DIR/starship.toml" "$HOME/.config/starship.toml"
 link "$DOTFILES_DIR/vscode/settings.json" "$HOME/.config/Code/User/settings.json"
 link "$DOTFILES_DIR/gitconfig" "$HOME/.gitconfig"
+# Hyprland desktop
+link "$DOTFILES_DIR/.config/hypr" "$HOME/.config/hypr"
+link "$DOTFILES_DIR/.config/waybar" "$HOME/.config/waybar"
+link "$DOTFILES_DIR/.config/rofi" "$HOME/.config/rofi"
+link "$DOTFILES_DIR/.config/kitty" "$HOME/.config/kitty"
+link "$DOTFILES_DIR/.config/fastfetch" "$HOME/.config/fastfetch"
 
 if [ ! -e "$HOME/.gitconfig.local" ]; then
     cp "$DOTFILES_DIR/gitconfig.local.example" "$HOME/.gitconfig.local"
