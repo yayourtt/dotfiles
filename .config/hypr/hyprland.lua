@@ -50,10 +50,12 @@ local menu        = "hyprlauncher"
 -- Or execute your favorite apps at launch like this:
 --
 -- hl.on("hyprland.start", function () 
---   hl.exec_cmd(terminal)
---   hl.exec_cmd("nm-applet")
---   hl.exec_cmd("waybar & hyprpaper & firefox")
---   hl.exec_cmd("discord")
+--     hl.exec_cmd(kitty)
+--     hl.exec_cmd("nm-applet")
+--     hl.exec_cmd("waybar")
+--     hl.exec_cmd("hyprpaper")
+--     hl.exec_cmd("discord")
+--     hl.exec_cmd("notify")
 -- end)
 
 
@@ -94,7 +96,7 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.config({
     general = {
         gaps_in  = 5,
-        gaps_out = 20,
+        gaps_out = 15,
 
         border_size = 2,
 
@@ -117,8 +119,9 @@ hl.config({
         rounding_power = 2,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity   = 1.0,
+        active_opacity   = 0.7,
         inactive_opacity = 1.0,
+	fullscreen_opacity = 0.9,
 
         shadow = {
             enabled      = true,
@@ -138,6 +141,7 @@ hl.config({
     animations = {
         enabled = true,
     },
+
 })
 
 -- Default curves and animations, see https://wiki.hypr.land/Configuring/Advanced-and-Cool/Animations/
@@ -213,8 +217,8 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = -1,    -- Set to 0 or 1 to disable the anime mascot wallpapers
-        disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
 
@@ -382,10 +386,7 @@ hl.config({
         inactive_opacity = 0.92,
     },
 })
-hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("hyprpaper")
-end)
+
 hl.bind(
     "SUPER + SPACE",
     hl.dsp.exec_cmd("rofi -show drun"),
