@@ -10,5 +10,6 @@
   "workbench.startupEditor": "none",
   "telemetry.telemetryLevel": "off",
   "git.autofetch": true,
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "workbench.secondarySideBar.defaultVisibility": "hidden"
 }

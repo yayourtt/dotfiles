@@ -1,0 +1,81 @@
+configuration {
+    modi: "drun,run";
+    show-icons: true;
+    display-drun: "Apps";
+    drun-display-format: "{name}";
+}
+
+* {
+    background: #1e1e2edd;
+    background-alt: #313244ee;
+    foreground: #cdd6f4ff;
+    accent: #89b4faff;
+    dark: #11111bff;
+
+    font: "Sans 13";
+}
+
+window {
+    width: 40%;
+    border: 2px;
+    border-color: @accent;
+    border-radius: 18px;
+
+    background-color: @background;
+    padding: 12px;
+}
+
+mainbox {
+    background-color: transparent;
+    padding: 10px;
+}
+
+inputbar {
+    background-color: @background-alt;
+    border-radius: 12px;
+    padding: 13px;
+    margin: 0px 0px 12px 0px;
+
+    children: [ prompt, entry ];
+}
+
+prompt {
+    text-color: @accent;
+    margin: 0px 10px 0px 0px;
+}
+
+entry {
+    text-color: @foreground;
+    placeholder: "Search applications...";
+    placeholder-color: #6c7086ff;
+}
+
+listview {
+    background-color: transparent;
+    lines: 7;
+    columns: 1;
+    spacing: 5px;
+    scrollbar: false;
+}
+
+element {
+    background-color: transparent;
+    text-color: @foreground;
+
+    padding: 10px;
+    border-radius: 10px;
+}
+
+element selected.normal {
+    background-color: @accent;
+    text-color: @dark;
+}
+
+element-icon {
+    size: 28px;
+    margin: 0px 12px 0px 0px;
+}
+
+element-text {
+    vertical-align: 0.5;
+}
