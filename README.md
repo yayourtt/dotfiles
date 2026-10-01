@@ -178,10 +178,16 @@ dotfiles/
 │   │
 │   ├── hypr/
 │   │   ├── hyprland.lua
+│   │   ├── look.lua
+│   │   ├── input.lua
+│   │   ├── binds.lua
+│   │   ├── rules.lua
+│   │   ├── autostart.lua
 │   │   ├── hypridle.conf
 │   │   ├── hyprlock.conf
 │   │   ├── hyprpaper.conf
 │   │   └── scripts/
+│   │       ├── agenda.sh
 │   │       └── powermenu.sh
 │   │
 │   ├── kitty/
@@ -227,6 +233,18 @@ nano ~/.config/hypr/hyprland.lua
 
 also modifies the Git-tracked version.
 
+`hyprland.lua` only holds monitors and environment variables, then loads the rest from the same folder:
+
+| File | Contents |
+|---|---|
+| `look.lua` | Gaps, borders, opacity, blur, animations, layouts |
+| `input.lua` | Keyboard, mouse, touchpad, gestures |
+| `binds.lua` | Default programs and keybindings |
+| `rules.lua` | Window and workspace rules |
+| `autostart.lua` | Programs launched with Hyprland |
+
+Hyprland reloads automatically when any of these files is saved.
+
 Check Hyprland configuration errors with:
 
 ```bash
@@ -257,7 +275,9 @@ hyprctl reload
 | `Super + F` | Fullscreen |
 | `Super + Shift + F` | Maximize |
 | `Super + Shift + Q` | Close window |
+| `Super + A` | Agenda (today and tomorrow) |
 | `Super + Shift + P` | Power menu |
+| `Super + M` | Exit Hyprland |
 | `Super + 1..5` | Switch workspace |
 | `Super + Shift + 1..5` | Move window to workspace |
 | `Super + V` | Toggle floating |
