@@ -28,6 +28,7 @@ link "$DOTFILES_DIR/.config/waybar" "$HOME/.config/waybar"
 link "$DOTFILES_DIR/.config/rofi" "$HOME/.config/rofi"
 link "$DOTFILES_DIR/.config/kitty" "$HOME/.config/kitty"
 link "$DOTFILES_DIR/.config/fastfetch" "$HOME/.config/fastfetch"
+link "$DOTFILES_DIR/.config/swaync" "$HOME/.config/swaync"
 
 if [ ! -e "$HOME/.gitconfig.local" ]; then
     cp "$DOTFILES_DIR/gitconfig.local.example" "$HOME/.gitconfig.local"
