@@ -8,9 +8,11 @@ link() {
     local src="$1" dest="$2"
     mkdir -p "$(dirname "$dest")"
     if [ -e "$dest" ] && [ ! -L "$dest" ]; then
-        mkdir -p "$BACKUP_DIR"
-        mv "$dest" "$BACKUP_DIR/"
-        echo "Backed up existing $dest to $BACKUP_DIR/"
+        # Keep the path relative to $HOME so same-named files don't overwrite each other
+        local backup="$BACKUP_DIR/${dest#"$HOME"/}"
+        mkdir -p "$(dirname "$backup")"
+        mv "$dest" "$backup"
+        echo "Backed up existing $dest to $backup"
     fi
     ln -sfn "$src" "$dest"
     echo "Linked $dest -> $src"

@@ -61,3 +61,8 @@ alias ...='cd ../..'
 alias gs='git status'
 alias gc='git commit'
 alias gp='git push'
+
+export QSYS_ROOTDIR="/home/yazid/intelFPGA_lite/21.1/quartus/sopc_builder/bin"
+
+# Added by Quartus Prime software
+export SALT_LICENSE_SERVER="$SALT_LICENSE_SERVER;/home/yazid/.altera.quartus/questa_lic.dat"
