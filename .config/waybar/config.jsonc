@@ -2,7 +2,7 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 36,
+    "height": 32,
     "spacing": 8,
 
     "modules-left": [
@@ -18,8 +18,29 @@
         "network",
         "battery",
         "tray",
+        "custom/notification",
 	"custom/power"
     ],
+
+    "custom/notification": {
+        "exec": "swaync-client -swb",
+        "return-type": "json",
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚<span foreground='#f38ba8'><sup>●</sup></span>",
+            "none": "󰂚",
+            "dnd-notification": "󰂛<span foreground='#f38ba8'><sup>●</sup></span>",
+            "dnd-none": "󰂛",
+            "inhibited-notification": "󰂚<span foreground='#f38ba8'><sup>●</sup></span>",
+            "inhibited-none": "󰂚",
+            "dnd-inhibited-notification": "󰂛<span foreground='#f38ba8'><sup>●</sup></span>",
+            "dnd-inhibited-none": "󰂛"
+        },
+        "tooltip": true,
+        "escape": false,
+        "on-click": "swaync-client -t -sw",
+        "on-right-click": "swaync-client -d -sw"
+    },
 
     "hyprland/workspaces": {
         "format": "{id}",

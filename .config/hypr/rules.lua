@@ -54,3 +54,19 @@ hl.window_rule({
 
     workspace = "4 silent",
 })
+
+-- Blur behind swaync and slide notifications in from the right edge
+hl.layer_rule({
+    name  = "swaync-blur",
+    match = { namespace = "^swaync-(control-center|notification-window)$" },
+
+    blur         = true,
+    ignore_alpha = 0.5,
+})
+
+hl.layer_rule({
+    name  = "swaync-slide",
+    match = { namespace = "^swaync-(control-center|notification-window)$" },
+
+    animation = "slide right",
+})
