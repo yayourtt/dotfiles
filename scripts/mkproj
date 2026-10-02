@@ -16,8 +16,9 @@ if [ $# -eq 0 ]; then
 	exit 1
 fi
 
-# Create a folder using the first argument
-mkdir "$1"
+# Create a folder using the first argument, stop if it
+# already exists so an existing project is never touched
+mkdir "$1" || exit 1
 
 # Enter the new folder, prevents the script from continuing
 # if the folder could not be entered

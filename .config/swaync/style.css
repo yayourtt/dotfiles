@@ -1,0 +1,263 @@
+/*
+ * swaync theme, Catppuccin Mocha to match waybar and kitty.
+ * Starts from the stock theme and only overrides what differs,
+ * so selectors added by future swaync releases keep working.
+ */
+@import url("/etc/xdg/swaync/style.css");
+
+:root {
+  --cc-bg: rgba(20, 22, 30, 0.85);
+  --noti-border-color: rgba(205, 214, 244, 0.08);
+  --noti-bg: 30, 30, 46;
+  --noti-bg-alpha: 0.92;
+  --noti-bg-darker: #181825;
+  --noti-bg-hover: #313244;
+  --noti-bg-focus: rgba(49, 50, 68, 0.6);
+  --noti-bg-alt: #181825;
+  --noti-close-bg: rgba(205, 214, 244, 0.08);
+  --noti-close-bg-hover: #f38ba8;
+  --text-color: #cdd6f4;
+  --text-color-disabled: #6c7086;
+  --bg-selected: #89b4fa;
+
+  --accent: #89b4fa;
+  --subtext: #a6adc8;
+  --surface: #313244;
+  --critical: #f38ba8;
+
+  --notification-icon-size: 40px;
+  --notification-group-icon-size: 22px;
+  --border-radius: 12px;
+  --font-size-summary: 13px;
+  --font-size-body: 12px;
+  --notification-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+
+  --mpris-album-art-icon-size: 56px;
+  --mpris-album-art-overlay: rgba(17, 17, 27, 0.7);
+  --mpris-album-art-shadow: none;
+  --widget-volume-row-icon-size: 18px;
+}
+
+* {
+  font-family: "JetBrainsMono Nerd Font", "AdwaitaMono Nerd Font", sans-serif;
+}
+
+/*** Notifications ***/
+
+.notification-row .notification-background {
+  padding: 4px 8px;
+}
+
+.notification-row .notification-background .notification {
+  border-left: 3px solid var(--accent);
+}
+
+.notification-row .notification-background .notification.low {
+  border-left-color: var(--surface);
+}
+
+.notification-row .notification-background .notification.critical {
+  border-left-color: var(--critical);
+  background: rgba(54, 38, 56, 0.95);
+}
+
+.notification-row .notification-background .notification .notification-default-action {
+  padding: 8px 10px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .image {
+  border-radius: 10px;
+  margin: 2px 10px 2px 0;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+  font-weight: 600;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+  font-size: 11px;
+  font-weight: normal;
+  color: var(--subtext);
+  margin-right: 26px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+  color: var(--subtext);
+  margin-top: 2px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content progressbar progress {
+  background: var(--accent);
+  border-radius: 4px;
+}
+
+.notification-row .notification-background .notification .notification-action > button {
+  background: var(--surface);
+  font-size: 12px;
+  padding: 4px;
+}
+
+.notification-row .notification-background .notification .notification-action > button:hover {
+  background: var(--accent);
+  color: #11111b;
+}
+
+.close-button {
+  min-width: 20px;
+  min-height: 20px;
+  margin-top: 6px;
+  margin-right: 6px;
+}
+
+.close-button:hover {
+  color: #11111b;
+}
+
+/* No grey box behind the keyboard-focused row */
+.notification-row:focus,
+.notification-group:focus {
+  background: transparent;
+}
+
+/* Popups get a soft shadow so they stand off the wallpaper */
+.floating-notifications .notification {
+  box-shadow: var(--notification-shadow);
+}
+
+/*** Control center ***/
+
+.control-center {
+  border: 1px solid var(--noti-border-color);
+  padding: 4px 0;
+}
+
+.control-center .control-center-list .notification {
+  box-shadow: none;
+}
+
+.control-center .control-center-list-placeholder {
+  font-size: 13px;
+}
+
+.widget {
+  margin: 4px 10px;
+  padding: 4px;
+}
+
+/* Title */
+.widget-title > label {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.widget-title > button {
+  background: var(--surface);
+  color: var(--text-color);
+  font-size: 12px;
+  padding: 2px 12px;
+  box-shadow: none;
+  border: none;
+}
+
+.widget-title > button:hover {
+  background: var(--critical);
+  color: #11111b;
+}
+
+/* Do Not Disturb */
+.widget-dnd label {
+  font-size: 13px;
+}
+
+.widget-dnd switch {
+  background: var(--surface);
+  border: none;
+}
+
+.widget-dnd switch:checked {
+  background: var(--accent);
+}
+
+.widget-dnd switch slider {
+  background: var(--text-color);
+}
+
+/* Quick toggles */
+.widget-buttons-grid {
+  background: rgba(var(--noti-bg), 0.6);
+  border-radius: var(--border-radius);
+  padding: 6px;
+}
+
+.widget-buttons-grid flowboxchild > button {
+  background: var(--surface);
+  color: var(--text-color);
+  font-size: 18px;
+  min-height: 40px;
+  margin: 2px;
+  border: none;
+  box-shadow: none;
+}
+
+.widget-buttons-grid flowboxchild > button:hover {
+  background: #45475a;
+}
+
+.widget-buttons-grid flowboxchild > button:checked {
+  background: var(--accent);
+  color: #11111b;
+}
+
+/* Media player */
+.widget-mpris .widget-mpris-player {
+  margin: 4px 0;
+  box-shadow: none;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+  padding: 10px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+  font-size: 13px;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  font-size: 12px;
+  color: var(--subtext);
+}
+
+/* Volume and brightness sliders */
+.widget-volume,
+.widget-backlight {
+  background: rgba(var(--noti-bg), 0.6);
+  border-radius: var(--border-radius);
+  padding: 4px 10px;
+}
+
+.widget-volume label,
+.widget-backlight label {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+.widget-volume trough,
+.widget-backlight trough {
+  min-height: 6px;
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.widget-volume highlight,
+.widget-backlight highlight {
+  border-radius: 6px;
+  background: var(--accent);
+}
+
+.widget-volume slider,
+.widget-backlight slider {
+  min-width: 12px;
+  min-height: 12px;
+  background: var(--text-color);
+  box-shadow: none;
+}

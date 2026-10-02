@@ -8,7 +8,7 @@ configuration {
 * {
     background: #1e1e2edd;
     background-alt: #313244ee;
-    foreground: #cdd6f4ff;
+    foreground: rgb(154, 169, 220);
     accent: #89b4faff;
     dark: #11111bff;
 
