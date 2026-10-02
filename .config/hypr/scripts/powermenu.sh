@@ -22,7 +22,12 @@ case "$chosen" in
         systemctl suspend
         ;;
     "$logout")
-        hyprshutdown
+        # hyprshutdown closes apps gracefully; fall back to a plain exit without it
+        if command -v hyprshutdown >/dev/null 2>&1; then
+            hyprshutdown
+        else
+            hyprctl dispatch 'hl.dsp.exit()'
+        fi
         ;;
     "$reboot")
         systemctl reboot

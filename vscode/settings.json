@@ -11,5 +11,14 @@
   "telemetry.telemetryLevel": "off",
   "git.autofetch": true,
   "git.confirmSync": false,
-  "workbench.secondarySideBar.defaultVisibility": "hidden"
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+  },
+  "claudeCode.preferredLocation": "panel",
+  "files.autoSave": "afterDelay",
+  "claudeCode.hideOnboarding": true,
 }

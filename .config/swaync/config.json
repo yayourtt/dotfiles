@@ -1,0 +1,97 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "ignore-gtk-theme": true,
+  "cssPriority": "user",
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "top",
+  "layer-shell": true,
+  "layer-shell-cover-screen": true,
+  "control-center-margin-top": 8,
+  "control-center-margin-bottom": 8,
+  "control-center-margin-right": 8,
+  "control-center-margin-left": 8,
+  "control-center-width": 380,
+  "control-center-height": 600,
+  "fit-to-screen": true,
+  "notification-window-width": 360,
+  "notification-body-image-height": 90,
+  "notification-body-image-width": 180,
+  "notification-grouping": true,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "image-visibility": "when-available",
+  "relative-timestamps": true,
+  "timeout": 6,
+  "timeout-low": 3,
+  "timeout-critical": 0,
+  "transition-time": 200,
+  "keyboard-shortcuts": true,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "script-fail-notify": true,
+  "text-empty": "All caught up",
+  "widgets": [
+    "title",
+    "dnd",
+    "buttons-grid",
+    "mpris",
+    "volume",
+    "backlight",
+    "notifications"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear"
+    },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
+    "buttons-grid": {
+      "buttons-per-row": 5,
+      "actions": [
+        {
+          "label": "󰤨",
+          "type": "toggle",
+          "command": "sh -c '$HOME/.config/swaync/toggle.sh wifi'",
+          "update-command": "sh -c '$HOME/.config/swaync/toggle.sh wifi status'"
+        },
+        {
+          "label": "󰂯",
+          "type": "toggle",
+          "command": "sh -c '$HOME/.config/swaync/toggle.sh bluetooth'",
+          "update-command": "sh -c '$HOME/.config/swaync/toggle.sh bluetooth status'"
+        },
+        {
+          "label": "󰄀",
+          "command": "sh -c 'swaync-client -cp; sleep 0.3; grim -g \"$(slurp -d)\" - | wl-copy'"
+        },
+        {
+          "label": "󰌾",
+          "command": "sh -c 'swaync-client -cp; pidof hyprlock || hyprlock'"
+        },
+        {
+          "label": "󰐥",
+          "command": "sh -c 'swaync-client -cp; ~/.config/hypr/scripts/powermenu.sh'"
+        }
+      ]
+    },
+    "mpris": {
+      "show-album-art": "when-available",
+      "autohide": true
+    },
+    "volume": {
+      "label": "󰕾"
+    },
+    "backlight": {
+      "label": "󰃟",
+      "device": "amdgpu_bl1"
+    },
+    "notifications": {
+      "vexpand": true
+    }
+  }
+}
