@@ -1,0 +1,60 @@
+// Compact greeting shown when a new shell opens (see .zshrc).
+// Run plain `fastfetch` for the full config.jsonc.
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+    "logo": {
+        "type": "kitty-direct",
+        "source": "~/.config/fastfetch/logo.png",
+        "width": 14,
+        "height": 6,
+        "padding": {
+            "top": 1,
+            "left": 2,
+            "right": 3
+        }
+    },
+
+    "display": {
+        "separator": "  ",
+        "brightColor": false,
+        "color": {
+            "keys": "magenta",
+            "separator": "90"
+        },
+        "key": {
+            "width": 4
+        }
+    },
+
+    "modules": [
+        "break",
+        {
+            "type": "title",
+            "format": "{#97}{user-name}{#90}@{#33}{host-name}"
+        },
+        {
+            "type": "os",
+            "key": "󰣇",
+            "keyColor": "blue",
+            "format": "{name}"
+        },
+        {
+            "type": "wm",
+            "key": "\uF2D2",
+            "keyColor": "cyan",
+            "format": "{pretty-name}"
+        },
+        {
+            "type": "uptime",
+            "key": "󰅐",
+            "keyColor": "green",
+            "format": "up {?days}{days}d {?}{hours}h {minutes}m"
+        },
+        {
+            // grey to white gradient
+            "type": "custom",
+            "format": "{#38;2;58;58;58}● {#38;2;85;85;85}● {#38;2;112;112;112}● {#38;2;139;139;139}● {#38;2;166;166;166}● {#38;2;193;193;193}● {#38;2;220;220;220}● {#38;2;255;255;255}●"
+        }
+    ]
+}
