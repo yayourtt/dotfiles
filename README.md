@@ -561,11 +561,4 @@ fastfetch
 ```
 
 ---
-
-## Philosophy
-
-Keep `main` boring.
-
-Experiment on branches.
-
 Merge only configurations that are stable enough to use every day.
