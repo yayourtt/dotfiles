@@ -8,9 +8,11 @@ link() {
     local src="$1" dest="$2"
     mkdir -p "$(dirname "$dest")"
     if [ -e "$dest" ] && [ ! -L "$dest" ]; then
-        mkdir -p "$BACKUP_DIR"
-        mv "$dest" "$BACKUP_DIR/"
-        echo "Backed up existing $dest to $BACKUP_DIR/"
+        # Keep the path relative to $HOME so same-named files don't overwrite each other
+        local backup="$BACKUP_DIR/${dest#"$HOME"/}"
+        mkdir -p "$(dirname "$backup")"
+        mv "$dest" "$backup"
+        echo "Backed up existing $dest to $backup"
     fi
     ln -sfn "$src" "$dest"
     echo "Linked $dest -> $src"
@@ -26,6 +28,7 @@ link "$DOTFILES_DIR/.config/waybar" "$HOME/.config/waybar"
 link "$DOTFILES_DIR/.config/rofi" "$HOME/.config/rofi"
 link "$DOTFILES_DIR/.config/kitty" "$HOME/.config/kitty"
 link "$DOTFILES_DIR/.config/fastfetch" "$HOME/.config/fastfetch"
+link "$DOTFILES_DIR/.config/swaync" "$HOME/.config/swaync"
 
 if [ ! -e "$HOME/.gitconfig.local" ]; then
     cp "$DOTFILES_DIR/gitconfig.local.example" "$HOME/.gitconfig.local"

@@ -1,26 +1,90 @@
-format = """
-$directory\
-$git_branch\
-$git_status\
-$cmd_duration\
-$line_break\
-$character"""
+"$schema" = 'https://starship.rs/config-schema.json'
 
-[character]
-success_symbol = "[➜](bold green)"
-error_symbol = "[➜](bold red)"
+# Two-line prompt, deep saturated colors (matches kitty)
+#
+# ╭─ 󰣇 yazid@yazid-thinkpad in  ~/Projects/dotfiles on  main !1
+# ╰─❯
+
+palette = "deep"
+add_newline = true
+
+format = """
+[╭─](muted)$os$username$hostname$directory$git_branch$git_status$python$nodejs$rust$cmd_duration
+[╰─](muted)$character"""
+
+[os]
+disabled = false
+style = "grey"
+format = "[$symbol]($style)"
+
+[os.symbols]
+EndeavourOS = "\uF322 "
+Arch = "\U000F08C7 "
+Linux = "\uF17C "
+
+[username]
+show_always = true
+style_user = "bright yellow"
+style_root = "red"
+format = "[$user]($style)"
+
+[hostname]
+ssh_only = false
+style = "yellow"
+format = "[@](muted)[$hostname]($style) "
 
 [directory]
-style = "bold cyan"
-truncation_length = 3
-truncate_to_repo = true
+style = "grey"
+read_only = " 󰌾"
+read_only_style = "red"
+truncation_length = 4
+truncation_symbol = "…/"
+truncate_to_repo = false
+home_symbol = "~"
+format = "[in](muted) [$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
-style = "bold purple"
+symbol = "\uE0A0 "
+style = "orange"
+format = "[on](muted) [$symbol$branch]($style) "
 
 [git_status]
-style = "bold yellow"
+style = "orange"
+format = "([$all_status$ahead_behind]($style) )"
+
+[python]
+symbol = "\uE73C "
+style = "yellow"
+format = "[via](muted) [$symbol$version( \\($virtualenv\\))]($style) "
+
+[nodejs]
+symbol = "\uE718 "
+style = "green"
+format = "[via](muted) [$symbol$version]($style) "
+
+[rust]
+symbol = "\uE7A8 "
+style = "orange"
+format = "[via](muted) [$symbol$version]($style) "
 
 [cmd_duration]
 min_time = 2_000
-format = "took [$duration](bold yellow) "
+style = "yellow"
+format = "[took](muted) [󱦟 $duration]($style) "
+
+[character]
+success_symbol = "[❯](bright_green)"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "[❮](bright_green)"
+
+[palettes.deep]
+muted = "#5c6370"
+cyan = "#33ccff"
+purple = "#9d4edd"
+blue = "#3a86ff"
+green = "#00d68f"
+magenta = "#e0218a"
+orange = "#ca7d00"
+yellow = "#ffc23d"
+red = "#ff4d6a"
+bright_green = "#00ff99"

@@ -36,12 +36,11 @@ alias gc="git commit"
 alias gp="git push"
 
 # System info when opening a terminal
-if [[ -o interactive ]] && command -v fastfetch >/dev/null 2>&1; then
-    fastfetch
+if [[ -o interactive && $TERM == xterm-kitty ]] && command -v fastfetch >/dev/null 2>&1; then
+    fastfetch -c "$HOME/.config/fastfetch/mini.jsonc"
 fi
 
-# Prompt
-eval "$(starship init zsh)"# Oh My Zsh
+# Oh My Zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME=""  # disabled, prompt is handled by Starship
 plugins=(git)
@@ -61,3 +60,8 @@ alias ...='cd ../..'
 alias gs='git status'
 alias gc='git commit'
 alias gp='git push'
+
+export QSYS_ROOTDIR="/home/yazid/intelFPGA_lite/21.1/quartus/sopc_builder/bin"
+
+# Added by Quartus Prime software
+export SALT_LICENSE_SERVER="$SALT_LICENSE_SERVER;/home/yazid/.altera.quartus/questa_lic.dat"
