@@ -38,7 +38,8 @@ window#waybar {
 #network,
 #pulseaudio,
 #battery,
-#tray {
+#tray,
+#custom-notification {
     padding: 0 12px;
     margin: 5px 4px;
     background: rgba(40, 42, 54, 0.75);
@@ -50,7 +51,15 @@ window#waybar {
 }
 
 #tray {
-    margin-right: 10px;
+    margin-right: 4px;
+}
+
+#custom-notification {
+    font-size: 15px;
+}
+
+#custom-notification:hover {
+    background: #313244;
 }
 
 #custom-power {
