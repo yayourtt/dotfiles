@@ -70,3 +70,12 @@ hl.layer_rule({
 
     animation = "slide right",
 })
+
+hl.window_rule({
+    -- True fullscreen (not maximize) windows are fully opaque (no wallpaper bleeding through)
+    name  = "opaque-fullscreen",
+    match = { fullscreen_state_internal = 2 },
+
+    opacity = "1.0 override 1.0 override 1.0 override",
+    opaque  = true,
+})
