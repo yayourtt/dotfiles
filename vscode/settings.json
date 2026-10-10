@@ -21,4 +21,6 @@
   "claudeCode.preferredLocation": "panel",
   "files.autoSave": "afterDelay",
   "claudeCode.hideOnboarding": true,
+  "chat.viewSessions.orientation": "stacked",
+  "leetcode.workspaceFolder": "/home/yazid/.leetcode",
 }
