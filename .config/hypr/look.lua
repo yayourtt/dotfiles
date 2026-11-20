@@ -6,7 +6,7 @@
 hl.config({
     general = {
         gaps_in  = 4,
-        gaps_out = 10,
+        gaps_out = 8,
 
         border_size = 2,
 
@@ -29,7 +29,7 @@ hl.config({
         rounding_power = 3,
 
         -- Change transparency of focused and unfocused windows
-        active_opacity     = 0.8,
+        active_opacity     = 0.9,
         inactive_opacity   = 0.9,
         fullscreen_opacity = 1.0,
 
@@ -139,5 +139,6 @@ hl.config({
     misc = {
         force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+        allow_session_lock_restore = true, -- If hyprlock crashes, relaunching it re-locks instead of a dead red screen
     },
 })
