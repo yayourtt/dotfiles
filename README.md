@@ -202,6 +202,7 @@ dotfiles/
 │
 ├── scripts/
 │   ├── mkproj
+│   ├── note
 │   └── sysupdate
 │
 ├── vscode/
@@ -276,6 +277,7 @@ hyprctl reload
 | `Super + Shift + F` | Maximize |
 | `Super + Shift + Q` | Close window |
 | `Super + A` | Agenda (today and tomorrow) |
+| `Super + Shift + N` | Sticky notes |
 | `Super + Shift + P` | Power menu |
 | `Super + M` | Exit Hyprland |
 | `Super + 1..5` | Switch workspace |
@@ -415,6 +417,24 @@ Find the installed command with:
 ```bash
 command -v mkproj
 ```
+
+### Sticky notes
+
+`note` keeps short notes that show up as small tilted stickies on the lock screen
+(up to four, the last one says how many more are hidden).
+
+```bash
+note                      # list
+note 'call mom & dad!'    # add, the note is one quoted string
+note -d 2                 # remove note 2
+note -c                   # remove every note
+note -m                   # rofi picker, also on Super + Shift + N and in the notification center
+note -- '-5kg by june'    # add a note that starts with a dash
+```
+
+Use single quotes: inside double quotes the shell still expands `$`, backticks and `!`.
+
+Notes live in `~/.local/share/sticky-notes/notes`, one per line.
 
 ---
 
