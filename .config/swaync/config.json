@@ -51,7 +51,7 @@
       "text": "Do Not Disturb"
     },
     "buttons-grid": {
-      "buttons-per-row": 5,
+      "buttons-per-row": 6,
       "actions": [
         {
           "label": "󰤨",
@@ -68,6 +68,10 @@
         {
           "label": "󰄀",
           "command": "sh -c 'swaync-client -cp; sleep 0.3; grim -g \"$(slurp -d)\" - | wl-copy'"
+        },
+        {
+          "label": "󰎚",
+          "command": "sh -c 'swaync-client -cp; $HOME/.local/bin/note -m'"
         },
         {
           "label": "󰌾",
