@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+# Tiny sticky notes, shown on the lock screen and editable from rofi.
+#
+# Usage:
+#   note                 list notes, numbered
+#   note '<text>'        add the string as one note, exactly as written
+#   note -d <n>          remove note n
+#   note -c              remove every note
+#   note -m              rofi picker: type to add, pick one to mark it done
+#   note --lock <n>      pango markup for lock-screen slot n (used by hyprlock)
+#   note -- '<text>'     add a note that starts with a dash
+#
+# Single quotes keep the shell away from special characters: note 'call mom & dad!'
+
+set -euo pipefail
+
+dir="${XDG_DATA_HOME:-$HOME/.local/share}/sticky-notes"
+file="$dir/notes"
+mkdir -p "$dir"
+touch "$file"
+
+slots=4    # how many notes the lock screen has room for
+width=34   # characters per line on the lock screen
+lines=5    # lines per note before it gets cut off
+
+add() {
+    # One note per line, so flatten any newlines and trim the ends
+    local text
+    text=$(printf '%s' "$*" | tr '\n\t' '  ' | sed 's/^ *//; s/ *$//')
+    [ -n "$text" ] && printf '%s\n' "$text" >>"$file"
+}
+
+done_note() {
+    local n="$1"
+    [[ "$n" =~ ^[1-9][0-9]*$ ]] || { echo "note: '$n' is not a note number" >&2; exit 1; }
+    sed -i "${n}d" "$file"
+}
+
+escape() {
+    sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g'
+}
+
+lock_slot() {
+    local n="$1" total text wrapped
+    total=$(wc -l <"$file")
+    text=$(sed -n "${n}p" "$file")
+    [ -z "$text" ] && exit 0
+
+    wrapped=$(printf '%s\n' "$text" | fold -s -w "$width" | sed 's/ *$//' | head -n "$lines")
+    if [ "$(printf '%s\n' "$text" | fold -s -w "$width" | wc -l)" -gt "$lines" ]; then
+        wrapped="${wrapped}…"
+    fi
+
+    printf '<span alpha="60%%">󰐃</span>  %s' "$(printf '%s' "$wrapped" | escape | sed '2,$s/^/    /')"
+    if [ "$n" -eq "$slots" ] && [ "$total" -gt "$slots" ]; then
+        printf '\n<span size="small" alpha="55%%">    +%d more</span>' "$((total - slots))"
+    fi
+}
+
+menu() {
+    local list chosen n
+    list=$(nl -w1 -s'  ' "$file")
+    chosen=$(printf '%s' "$list" | rofi -dmenu -i \
+        -p "󰎚 Notes" \
+        -mesg "Type + Enter: add   •   Pick + Enter: done") || exit 0
+    [ -z "$chosen" ] && exit 0
+
+    # A picked line comes back exactly as shown, anything else is new text
+    if printf '%s\n' "$list" | grep -qxF -- "$chosen"; then
+        n="${chosen%%  *}"
+        done_note "$n"
+    else
+        add "$chosen"
+    fi
+}
+
+add_arg() {
+    if [ "$#" -ne 1 ]; then
+        echo "note: quote the note so it stays one string, e.g. note 'buy milk & eggs'" >&2
+        exit 1
+    fi
+    add "$1"
+}
+
+case "${1:-}" in
+    "")     [ "$#" -eq 0 ] && nl -w2 -s'  ' "$file" ;;
+    -d)     done_note "${2:?usage: note -d <n>}" ;;
+    -c)     : >"$file" ;;
+    -m)     menu ;;
+    --lock) lock_slot "${2:?usage: note --lock <n>}" ;;
+    --)     shift; add_arg "$@" ;;
+    -*)     echo "note: unknown option '$1' (use note -- '$1...' to add it as text)" >&2; exit 1 ;;
+    *)      add_arg "$@" ;;
+esac
