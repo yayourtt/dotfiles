@@ -11,6 +11,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("nm-applet --indicator")
+    hl.exec_cmd("~/.config/hypr/scripts/save-crash-logs.sh") -- keep logs of a crashed previous instance
 
     -- Clipboard history
     hl.exec_cmd("wl-paste --type text --watch cliphist store")
