@@ -25,6 +25,7 @@ hl.bind(mainMod .. " + B",     hl.dsp.exec_cmd(browser),     { description = "Br
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(menu),        { description = "Application launcher" })
 hl.bind(mainMod .. " + N",     hl.dsp.exec_cmd("swaync-client -t -sw"), { description = "Notification center" })
 hl.bind(mainMod .. " + A",     hl.dsp.exec_cmd(scripts .. "/agenda.sh"), { description = "Agenda" })
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("~/.local/bin/note -m"), { description = "Sticky notes" })
 hl.bind(
     mainMod .. " + C",
     hl.dsp.exec_cmd([[cliphist list | rofi -dmenu -display-columns 2 -p "Clipboard" | cliphist decode | wl-copy]]),
